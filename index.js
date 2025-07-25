@@ -7,6 +7,9 @@ const PORT = 8000
 // app.get("/", (req, res) => {
 //   res.send("Welcome to the Movie API!")
 // })
+
+app.use(express.json())
+//connect db
 connectDB()
 
 app.use("/movies", movieRoutes)
