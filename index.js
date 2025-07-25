@@ -1,11 +1,13 @@
 import express from "express"
 import movieRoutes from "./routes/movies.route.js"
+import connectDB from "./lib/db.js"
 const app = express()
-const PORT = 5000
+const PORT = 8000
 
-app.get("/", () => {
-  res.json({ msg: "hello" })
-})
+// app.get("/", (req, res) => {
+//   res.send("Welcome to the Movie API!")
+// })
+connectDB()
 
 app.use("/movies", movieRoutes)
 app.listen(PORT, () => {

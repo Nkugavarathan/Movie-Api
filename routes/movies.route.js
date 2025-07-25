@@ -7,8 +7,6 @@ import {
 } from "../controllers/movie.controller.js"
 const router = express.Router()
 
-router.get("/", movieIndex)
-
 //readmovies
 router.get("/", movieIndex)
 
@@ -19,6 +17,6 @@ router.post("/", createMovie)
 router.put("/:id", updateMovie)
 
 //deletemovie
-router.get("/:id", deleteMovie)
+router.delete("/:id", deleteMovie)
 
 export default router
