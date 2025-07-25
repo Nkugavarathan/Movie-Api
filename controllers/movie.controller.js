@@ -1,7 +1,12 @@
 import Movie from "../models/movie.model.js"
 
-export const movieIndex = (req, res) => {
-  res.send("Get all movie lists")
+export const movieIndex = async (req, res) => {
+  try {
+    const movie = await Movie.find()
+    res.status(200).json(movie)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 export const createMovie = async (req, res) => {
   // console.log(req.body)
@@ -15,8 +20,10 @@ export const createMovie = async (req, res) => {
   }
 }
 export const updateMovie = (req, res) => {
-  res.send("movie updated")
+  try {
+  } catch (error) {}
 }
 export const deleteMovie = (req, res) => {
-  res.send("movie deleted")
+  try {
+  } catch (error) {}
 }
