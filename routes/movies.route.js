@@ -1,21 +1,24 @@
 import express from "express"
+import {
+  createMovie,
+  deleteMovie,
+  movieIndex,
+  updateMovie,
+} from "../controllers/movie.controller.js"
 const router = express.Router()
 
-router.get("/", (req, res) => {
-  //   res.json({ msg: "Hellow words" })
-  res.send("Hello from Express")
-})
+router.get("/", movieIndex)
 
 //readmovies
-router.get("/", (req, res) => {})
+router.get("/", movieIndex)
 
 //postmovie
-router.post("/", (req, res) => {})
+router.post("/", createMovie)
 
 //updatemovie
-router.put("/:id", (req, res) => {})
+router.put("/:id", updateMovie)
 
 //deletemovie
-router.get("/:id", (req, res) => {})
+router.get("/:id", deleteMovie)
 
 export default router
