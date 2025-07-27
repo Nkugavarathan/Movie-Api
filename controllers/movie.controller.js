@@ -1,5 +1,6 @@
 import Movie from "../models/movie.model.js"
 
+//get all movie
 export const movieIndex = async (req, res) => {
   try {
     const movie = await Movie.find()
@@ -9,6 +10,7 @@ export const movieIndex = async (req, res) => {
   }
 }
 
+//create movie
 export const createMovie = async (req, res) => {
   const { title, desc } = req.body
   const newMovie = new Movie({ title, desc })
@@ -33,6 +35,8 @@ export const specmovieDetail = async (req, res) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+//update movie
 export const updateMovie = async (req, res) => {
   try {
     const updatedMovie = await Movie.findByIdAndUpdate(
@@ -53,6 +57,7 @@ export const updateMovie = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 }
+
 // Delete movie
 export const deleteMovie = async (req, res) => {
   try {
