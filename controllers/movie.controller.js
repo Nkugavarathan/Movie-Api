@@ -1,6 +1,11 @@
+// Import the Movie model (schema connected to the 'movies' collection in MongoDB)
 import Movie from "../models/movie.model.js"
 
-//get all movie
+//
+// GET all movies
+//
+// Movie.find() → Fetches all documents in the 'movies' collection
+//
 export const movieIndex = async (req, res) => {
   try {
     const movie = await Movie.find()
@@ -10,10 +15,16 @@ export const movieIndex = async (req, res) => {
   }
 }
 
-//create movie
+//
+// CREATE a new movie
+//
+// new Movie({...}) → Creates a new Movie document (not saved yet)
+// .save() → Saves the document to the database
+//
 export const createMovie = async (req, res) => {
   const { title, desc } = req.body
   const newMovie = new Movie({ title, desc })
+
   try {
     const savedMovie = await newMovie.save()
     return res.status(201).json(savedMovie)
@@ -22,12 +33,17 @@ export const createMovie = async (req, res) => {
   }
 }
 
-//specfic movie get by id
+//
+// GET a specific movie by ID
+//
+// Movie.findById(id) → Finds a single movie document by its MongoDB ObjectId
+//
 export const specmovieDetail = async (req, res) => {
   try {
     const movie = await Movie.findById(req.params.id)
+
     if (movie == null) {
-      return res.status(404).json({ message: "cannot find movie" })
+      return res.status(404).json({ message: "Cannot find movie" })
     } else {
       res.json(movie)
     }
@@ -36,7 +52,13 @@ export const specmovieDetail = async (req, res) => {
   }
 }
 
-//update movie
+//
+// UPDATE a movie by ID
+//
+// Movie.findByIdAndUpdate(id, updateObj, options)
+// → Finds movie by ID and updates fields (title, desc)
+// → `{ new: true }` returns the updated document instead of the old one
+//
 export const updateMovie = async (req, res) => {
   try {
     const updatedMovie = await Movie.findByIdAndUpdate(
@@ -45,7 +67,7 @@ export const updateMovie = async (req, res) => {
         title: req.body.title,
         desc: req.body.desc,
       },
-      { new: true }
+      { new: true } // Return the updated document
     )
 
     if (!updatedMovie) {
@@ -58,15 +80,33 @@ export const updateMovie = async (req, res) => {
   }
 }
 
-// Delete movie
+//
+// DELETE a movie by ID
+//
+// Movie.findByIdAndDelete(id)
+// → Finds movie by ID and deletes it from the collection
+//
 export const deleteMovie = async (req, res) => {
   try {
     const deletedMovie = await Movie.findByIdAndDelete(req.params.id)
+
     if (!deletedMovie) {
       return res.status(404).json({ message: "Movie not found" })
     }
+
     res.json({ message: "Movie deleted successfully" })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
+
+/*
+Method	Purpose
+find()	- Get all documents
+new Model({...})-	Create a new document (not saved)
+.save()-	Save a new document to DB
+findById(id)-	Get a single document by ID
+findByIdAndUpdate()-	Update a document by ID
+findByIdAndDelete()-	Delete a document by ID
+
+*/
