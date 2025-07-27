@@ -1,12 +1,10 @@
 import React from "react"
-import App from "./App"
+import ReactDOM from "react-dom/client"
+import App from "./App.jsx"
+import "./index.css"
 
-function main() {
-  return (
-    <div>
-      <App />
-    </div>
-  )
-}
-
-export default main
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
