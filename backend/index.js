@@ -2,13 +2,15 @@
 import express from "express"
 import movieRoutes from "./routes/movies.route.js"
 import connectDB from "./lib/db.js" // file that connects to MongoDB
-
+import cors from "cors"
 import dotenv from "dotenv"
+
 dotenv.config() // load variables from .env file
 
 const port = process.env.PORT || 5000 // fallback port if .env is missing
 const app = express()
 
+app.use(cors())
 // Middleware: parse incoming JSON requests
 app.use(express.json())
 
