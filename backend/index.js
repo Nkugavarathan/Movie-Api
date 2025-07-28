@@ -10,7 +10,8 @@ dotenv.config() // load variables from .env file
 const port = process.env.PORT || 5000 // fallback port if .env is missing
 const app = express()
 
-app.use(cors())
+app.use(cors({ origin: "http://localhost:5173" }))
+
 // Middleware: parse incoming JSON requests
 app.use(express.json())
 
